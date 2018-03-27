@@ -581,9 +581,8 @@ func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
 	}
 	// Transactor should have enough funds to cover the costs
 	// cost == V + GP * GL
-	log.Info("===============================================")
-	log.Info(strconv.Itoa(pool.currentState.GetBalance(from)))
 	if pool.currentState.GetBalance(from).Cmp(tx.Cost()) < 0 {
+		log.Ingo("ErrInsufficientFunds==========================")
 		return ErrInsufficientFunds
 	}
 	intrGas := IntrinsicGas(tx.Data(), tx.To() == nil, pool.homestead)
