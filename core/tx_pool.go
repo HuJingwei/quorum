@@ -24,6 +24,7 @@ import (
 	"sort"
 	"sync"
 	"time"
+	"strconv"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/state"
@@ -581,7 +582,7 @@ func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
 	// Transactor should have enough funds to cover the costs
 	// cost == V + GP * GL
 	log.Info("===============================================")
-	log.Info(pool.currentState.GetBalance(from))
+	log.Info(strconv.Itoa(pool.currentState.GetBalance(from)))
 	if pool.currentState.GetBalance(from).Cmp(tx.Cost()) < 0 {
 		return ErrInsufficientFunds
 	}
